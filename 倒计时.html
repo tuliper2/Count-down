@@ -1,0 +1,118 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<link rel="stylesheet" type="text/css" href="style/style.css">
+<title>倒计时</title>
+<script>
+window.onload=function(){
+	var go1=document.getElementById("go");
+	var go2=document.getElementById("go2");
+	
+	var fill_in=document.getElementById('fill_in');
+	var inputyear=fill_in.getElementsByTagName('input')[0];
+	var inputmonth=fill_in.getElementsByTagName('input')[1];
+	var inputday=fill_in.getElementsByTagName('input')[2];
+	
+	var strong=document.getElementsByTagName('strong')[0];
+	
+	var dayp=document.getElementById("day");
+	var hourp=document.getElementById("hour");
+	var minp=document.getElementById("min");
+	var secp=document.getElementById("sec");
+	
+	//在位数不足的数字前补0
+	function setnum(num,n){
+		var str=''+num
+		while(str.length<n)
+		{
+			str='0'+str
+			}
+			return str
+		}
+	go2.onmouseover=function()
+	{
+		go1.className="active"
+		}
+	go2.onmouseout=function()
+	{
+		go1.className=""
+		}
+	go2.onclick=function()
+	{
+		if(inputyear.value==''||isNaN(inputyear.value))
+		{alert("输入错误，年不能输入空值及非数字");return;}
+		else if(inputmonth.value==''||isNaN(inputmonth.value)){alert("输入错误，月不能输入空值及非数字");return;}
+		else if(inputday.value==''||isNaN(inputday.value)){alert("输入错误，日不能输入空值及非数字");return;}
+		strong.innerHTML=inputyear.value+'年'+inputmonth.value+'月'+inputday.value+'日'
+		setInterval(update,1000);
+		update()
+	}
+	function update(){
+		//alert(inputyear.value+"-"+inputmonth.value+"-"+inputday.value)
+		var dateEnd=new Date();
+		var dateNow=new Date();
+		dateEnd.setFullYear(parseInt(inputyear.value));
+		dateEnd.setMonth(parseInt(inputmonth.value)-1);
+		dateEnd.setDate(parseInt(inputday.value));
+		dateEnd.setHours(0);
+		dateEnd.setMinutes(0);
+		dateEnd.setSeconds(0);		
+		//getTime() 获取时间戳,从1970年到现在经历的毫秒数
+		//alert(dateEnd.getTime()+"\n"+dateNow.getTime())
+		 /*得到剩余秒数*/
+		var iRemain=(dateEnd.getTime()-dateNow.getTime())/1000;		
+		//alert(iRemain)
+		//判断用户输入是否合法
+		if(iRemain<0)
+		{
+			return;
+			}	
+		//alert(iRemain/86400);//还剩几天
+		var iDay=parseInt(iRemain/86400);
+		iRemain%=86400;//扣掉能凑成整数的天
+		var iHour=parseInt(iRemain/3600);
+		iRemain%=3600;//扣掉能凑成整数的小时
+		//alert("还剩余："+iDay+"天"+iHour+"小时")
+		var iMinutes=parseInt(iRemain/60);
+		iRemain%=60;//扣掉能凑成整数的分钟
+		var isec=iRemain
+		dayp.innerHTML=setnum(iDay,3)		
+		hourp.innerHTML=setnum(iHour,2)	
+		minp.innerHTML=setnum(iMinutes,2)	
+		secp.innerHTML=setnum(isec,2)		
+		
+		}
+			
+}	
+</script>
+
+</head>
+
+<body>
+<div id="div1">
+	<div id="fill_in">
+        <span class="span1">请输入：</span>
+            <input type="text" id="t1">
+        <span class="span1">年</span>   
+            <input type="text" id="t2">
+        <span class="span2">月</span>       
+            <input type="text" id="t3">
+        <span class="span3">日</span>
+	</div>
+	
+    <a href="#" id="go" class="go"></a>
+    <a href="#" id="go2"></a>
+    
+    <p id="target">
+    现在距离-<strong>2016年12月21日</strong>-还剩：
+    </p>
+    <div id="date">
+    	<p id="day">000</p>
+        <p id="hour">00</p>
+        <p id="min">00</p>
+        <p id="sec">00</p>
+    </div>
+</div>
+</body>
+</html>

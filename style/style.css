@@ -1,0 +1,18 @@
+@charset "utf-8";
+body{ background:url(../images/djs/body.gif);width:100%;height:100%;color:white;font-weight:bold}
+#div1{ background:url(../images/djs/xx_bg2.jpg);width:600px;height:531px;margin:auto;
+position:relative;}
+#t1{width:80px}
+#t2,#t3{width:50px}
+#t3{margin-left:-10px}
+#fill_in{ position:absolute;left:115px;top:108px;}
+#fill_in input{border-radius:10px; text-align:center}
+#target{position:absolute;left:170px;top:315px}
+strong{color:#FC3}
+#date{position:absolute;left:90px;top:345px;width:425px;height:157px}
+#date p{display:inline-block; font-size:50px;color:#FC3}
+#hour{margin-left:45px}
+#min{margin-left:70px}
+#sec{margin-left:45px}
+#go,#go2{position:absolute;width:150px;height:150px;left:237px;top:155px}
+.active{ background:url(../images/djs/btn_hover.jpg)}

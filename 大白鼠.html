@@ -1,0 +1,160 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+<style>
+#div1 {
+	width: 500px;
+	height: 500px;
+	margin-left: 450px;
+	border: 1px solid black;
+	border-radius: 10px;
+	float: left
+}
+#div2, .div2 {
+	width: 100px;
+	height: 100px;
+	border: 1px solid black;
+	background: #ccc;
+	margin: auto;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	margin-left: -50px;
+	margin-top: -170px;
+	line-height: 100px;
+	text-align: center
+}
+#title {
+	width: 500px;
+	height: 30px;
+	background: #FF0;
+	border-bottom: 1px solid black;
+	text-align: center;
+	border-radius: 10px
+}
+#right_div {
+	width: 200px;
+	height: 500px;
+	border: 1px solid black;
+	border-radius: 10px;
+	float: left;
+	text-align: center;
+	display: none
+}
+#div3 {
+	height: 20px
+}
+#color span {
+	display: inline-block;
+	width: 30px;
+	height: 20px;
+	border: 1px solid black;
+	margin-left: 10px;
+	margin-top: 10px
+}
+#red {
+	background: red
+}
+#yellow {
+	background: yellow
+}
+#green {
+	background: green
+}
+#size span {
+	display: inline-block;
+	width: 50px;
+	height: 40px;
+	border: 1px solid black;
+	margin-left: 10px;
+	margin-top: 10px;
+	line-height: 40px
+}
+input {
+	width: 50px;
+	height: 40px;
+	margin-left:20px
+}
+</style>
+<script>
+	window.onload=function(){
+		function getid(id){
+				return document.getElementById(id)
+			}
+		var title=getid("title");
+		var right_div=getid("right_div");
+		var sure=getid("sure");
+		var div2=getid("div2");
+		var red=getid("red");
+		var yellow=getid("yellow");
+		var green=getid("green");
+		var bigger=getid("bigger");
+		var smaller=getid("smaller");
+		var huifu=getid("huifu");
+		title.onmouseover=function(){
+				this.style.backgroundColor="blue"
+			}
+		title.onmouseout=function(){
+				this.style.backgroundColor="yellow"
+			}		
+		title.onclick=function(){
+				right_div.style.display="block"
+			}
+		sure.onclick=function(){
+				right_div.style.display="none"
+			}
+		red.onclick=function(){
+				div2.style.backgroundColor="red"
+			}		
+		yellow.onclick=function(){
+				div2.style.backgroundColor="yellow"
+			}	
+		green.onclick=function(){
+				div2.style.backgroundColor="green"
+			}	
+			num=100
+		bigger.onclick=function(){
+			num+=50
+			if(num>=300){
+				num=300
+				}
+				div2.style.width=num+"px"
+				div2.style.height=num+"px"
+				div2.style.lineHeight=num+"px"
+				
+			}	
+		smaller.onclick=function(){
+			num-=50
+			if(num<=100){
+				num=100
+				}
+				div2.style.width=num+"px"
+				div2.style.height=num+"px"
+				div2.style.lineHeight=num+"px"
+			}	
+		huifu.onclick=function(){
+				div2.style=""
+			}	
+		}
+</script>
+</head>
+
+<body>
+<div id="div1">
+  <div id="title">点击此处设置样式</div>
+  <div id="div2">大白鼠</div>
+</div>
+<div id="right_div">
+  <div id="div3"></div>
+  <span>Color</span>
+  <div id="color"> <span id="red"></span><span id="yellow"></span><span id="green"></span> </div>
+  <span>Size</span>
+  <div id="size"><span id="bigger">变大</span><span id="smaller">变小</span></div>
+  <hr>
+  <input id="huifu" type="button" value="恢复">
+  <input  id="sure"type="button" value="确定">
+</div>
+</body>
+</html>
