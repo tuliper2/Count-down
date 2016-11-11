@@ -1,0 +1,127 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+<style>
+#div1{margin:auto;width:160px}
+#content {
+	width: 400px;
+	height: 500px;
+	border: 8px solid #ccc;
+	margin: 40px auto 0;
+	position: relative
+}
+#content a {
+	width: 40px;
+	height: 40px;
+	background: #000;
+	border: 3px solid #fff;
+	position: absolute;
+	top: 175px;
+	text-align: center;
+	text-decoration: none;
+	line-height: 40px;
+	color: #fff;
+	font-size: 30px;
+	font-weight: bold;
+filter:				alpha(opacity:70);
+	opacity: 0.7
+}
+#content a:hover {
+filter:alpha(opacity:80);
+	opacity: 0.8;
+	color: red
+}
+#prev {
+	left: 10px
+}
+#next {
+	right: 10px
+}
+#text, #span1 {
+	position: absolute;
+	left: 0;
+	width: 400px;
+	height: 30px;
+	line-height: 30px;
+	text-align: center;
+	color: #fff;
+	background: #000;
+ filter:	alpha(opacity:80);
+	opacity: 0.8
+}
+#text {
+	top: 0;
+}
+#span1 {
+	bottom: 0;
+}
+#img1 {
+	width: 400px;
+	height: 500px
+}
+</style>
+<script>
+	window.onload=function(){
+		function getid(id){
+			return document.getElementById(id);
+			}
+		var prev=getid("prev");
+		var next=getid("next");
+		var text=getid("text");
+		var img=getid("img1");
+		var span=getid("span1");
+		var dianji1=getid("click");
+		var auto=getid("auto");
+		var notauto=getid("noauto");
+		var arrUrl=['images/mm1.jpg','images/mm2.jpg','images/mm3.jpg','images/mm4.jpg','images/mm5.jpg']
+		var arrText=['阿拉蕾','古典美女','街拍美女','性感美女','生活美女']
+		
+		var num=0;
+		//初始化
+	function fnTab(){
+		span.innerHTML=num+1+'/'+arrText.length //1/5
+		img.src=arrUrl[num];
+		text.innerHTML=arrText[num];
+	}
+	setTimeout(fnTab,3000)
+	function dianji(){		
+		next.onclick=function(){
+		num++;
+		if(num==arrText.length){num=0}
+		fnTab()
+		
+			}
+		prev.onclick=function(){
+		num--;
+		if(num==-1){num=arrText.length-1}
+		fnTab()
+		
+			}
+		}
+	dianji1.onclick=dianji
+	function zidong(){
+		num++;
+		if(num==arrText.length){num=0}
+		span.innerHTML=num+1+'/'+arrText.length //1/5
+		img.src=arrUrl[num];
+		text.innerHTML=arrText[num];
+		}
+
+	auto.onclick=function(){timer=setInterval(zidong,1000)}
+	function clear(){clearInterval(timer)}
+	notauto.onclick=clear
+		}
+</script>
+</head>
+
+<body>
+<div id="div1">
+<input id="auto" type="button" value="自动播放">
+<input id="click" type="button" value="点击播放">
+<input id="noauto" type="button" value="停止自动播放">
+</div>
+<div id="content"> <a id="prev" href="#"><</a> <a id="next" href="#">></a> <span id="text">图片加载中...</span> <img id="img1" src="images\jz.gif"> <span id="span1">数量正在计算中...</span> </div>
+</body>
+</html>

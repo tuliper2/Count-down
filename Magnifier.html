@@ -1,0 +1,119 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<style>
+#div1 {
+	width: 400px;
+	height: 586px;
+	padding: 5px;
+	border: 1px solid #ccc;
+	position: relative;
+}
+#div1 .small_pic {
+	width: 400px;
+	height: 586px;
+	position: relative;
+}
+#div1 .mark {
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	left: 0px;
+	top: 0px;
+	z-index: 2;
+	
+}
+#div1 .float_layer {
+	position: absolute;
+	left: 0;
+	top: 0;
+	width: 100px;
+	height: 100px;
+	display: none;
+	border: 1px solid #fff;
+	background: #fff;
+	opacity: 0.3
+}
+#div1 .big_pic {
+	border: 1px solid #ccc;
+	position: absolute;
+	top: 1px;
+	left: 412px;
+	overflow: hidden;
+	width: 500px;
+	height: 700px;
+	display: none
+}
+#div1 .big_pic img {
+	position: absolute;
+	top: 0px;
+	left: 0px;
+}
+</style>
+<script>
+window.onload=function(){
+	function getclass(Parent,sclass){
+		var Ele=Parent.getElementsByTagName("*");
+		var tmp=[];
+		var i=0;
+		for(i=0;i<Ele.length;i++)
+		{
+			if(Ele[i].className==sclass)
+			{
+				tmp.push(Ele[i]);
+				}
+			
+			}	
+		return tmp;		
+		
+		}
+	var div1=document.getElementById("div1");
+	var mark=getclass(div1,"mark")[0];
+	var float=getclass(div1,"float_layer")[0];
+	var bigger=getclass(div1,"big_pic")[0];
+	var smaller=getclass(div1,"small_pic")[0];
+	var img=bigger.getElementsByTagName("img")[0];
+	mark.onmouseover=function(){
+		float.style.display="block"
+		bigger.style.display="block"
+		}
+	mark.onmouseout=function(){
+		float.style.display="none"
+		bigger.style.display="none"
+		}
+	mark.onmousemove=function(ev){
+		var eve=ev||event;
+		var l=eve.clientX-div1.offsetLeft-smaller.offsetLeft-float.offsetWidth/2
+		var t=eve.clientY-div1.offsetTop-smaller.offsetTop-float.offsetHeight/2
+		
+		if(l<0){
+			l=0
+			}else if(l>mark.offsetWidth-float.offsetWidth)
+			{
+				l=mark.offsetWidth-float.offsetWidth
+				}
+		if(t<0){
+			t=0
+			}else if(t>mark.offsetHeight-float.offsetHeight)
+			{
+				t=mark.offsetHeight-float.offsetHeight
+				}		
+		float.style.left=l+"px"
+		float.style.top=t+"px"
+		
+		var percentX=l/(mark.offsetWidth-float.offsetWidth)
+		var percentY=t/(mark.offsetHeight-float.offsetHeight)
+		img.style.left=-percentX*(img.offsetWidth-bigger.offsetWidth)+"px"
+		img.style.top=-percentY*(img.offsetHeight-bigger.offsetHeight)+"px"
+		}
+	}
+</script>
+</head>
+
+<body>
+<div id="div1">
+<div class="small_pic"> <span class="mark"></span> <span class="float_layer"></span> <img src="images/small.png"> </div>
+<div class="big_pic"> <img src="images/big.jpg"> </div>
+</body>
+</html>
